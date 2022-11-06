@@ -5,14 +5,10 @@ import cv2
 import pandas as pd
 import rasterio
 import numpy as np
-import json
 import subprocess
 
-# from osgeo import osr
-#
 # Retrieve an image using rasdaman
 service_endpoint = "https://ows.rasdaman.org/rasdaman/ows"
-
 # Parameters
 threshold = 0.9
 output_format = "image/tiff"
@@ -42,6 +38,8 @@ with open(output_file, "wb") as f:
     f.write(response.content)
 
 # Get the jpeg image
+# TODO: Retrieve the image in 4326 coordinates from the server
+# Link: https://doc.rasdaman.org/11_cheatsheets.html#coverage-operations (crsTransform)
 query2 = '''
 for $c in (S2_L2A_32631_B08_10m),
     $d in (S2_L2A_32631_B04_10m)
@@ -121,19 +119,10 @@ for i in range(unique_labels.size):
 
         coordPointsTrans.append([float(out[0]), float(out[1])])
 
-    # coordPointsTrans.append([float(out[0]), float(out[1])])
-
     ourDict[i]["CentroidCoordTrans"] = [float(out[0]), float(out[1])]
     ourDict[i]["PointsCoordTrans"] = coordPointsTrans
 
-with open('saved_dictionary.pkl', 'wb') as f:
+# Save the centroids and points to a pickle file
+with open('centroids_and_points.pkl', 'wb') as f:
     pickle.dump(ourDict, f)
-
-np.save('points_centroids.npy', ourDict)
-
-
-# with open(filename, 'wb') as outfile:
-#     json.dump(data, outfile)
-
-print()
 
