@@ -10,6 +10,10 @@ from jinja2  import TemplateNotFound
 import pickle
 import requests as req
 
+import glin.ranking as ranking
+import glin.routing as routing
+import glin.plotting as plotting
+
 import random
 
 # App modules
@@ -75,16 +79,15 @@ def cb_size():
 def make_plot(config):
 
     print("Making plot")
-    df = pd.DataFrame({
-        'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 
-        'Bananas'],
-        'Amount': [4, 1, 2, 2, 4, random.random()],
-        'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
-    })
-    fig = px.bar(df, x='Fruit', y='Amount', color='City', 
-        barmode='group')
 
-    return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    # Otto's comes here
+
+    # routing.compute_paths(config["Center"], )
+
+    poly_json = plotting.dummy_pols()
+    scores = plotting.dummy_scores()
+
+    return plotting.plot_polygons(poly_json, scores, config["Center"][0], config["Center"][1], zoom=8)
 
 def get_segment( request ): 
 
@@ -123,4 +126,4 @@ def update_address(config):
     
     info = resp[0]
 
-    config["Center"] = {"lat": float(info["lat"]), "lon": float(info["lon"])}
+    config["Center"] = [float(info["lat"]), float(info["lon"])]

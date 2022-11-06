@@ -1,0 +1,22 @@
+routes = pd.DataFrame(
+	list(zip(blobId, routeId, totalDistance, railDistance, roadDistance, 
+		portDistance, airDistance)),
+               columns =['BlobId', 'RouteId', 'TotalDistance','RailDistance',
+			'RoadDistance','PortDistance','AirDistance'])
+
+
+Routes Procedure (A, B)
+
+	Drive route:
+		d1 = Direct closest through roads
+		return {road=d1, rail=0, }
+
+	Airport route:
+		d1 = Get airports, airport A, airport B
+		d2 = Drive route(A, airport A)
+		d3 = rive route(airport B, B)
+		
+		return {road=d1+d3, rail=0, air=d2}
+
+	Rail route:
+		d1 = Rail route	
