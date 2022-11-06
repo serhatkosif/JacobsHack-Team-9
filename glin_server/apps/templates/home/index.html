@@ -1,0 +1,149 @@
+<!--
+
+=========================================================
+* Pixel Free Bootstrap 5 UI Kit
+=========================================================
+
+* Product Page: https://themesberg.com/product/ui-kit/pixel-free-bootstrap-5-ui-kit
+* Copyright 2021 Themesberg (https://www.themesberg.com)
+
+* Coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Contact us if you want to remove it.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script>
+        function address_cb(selection) {
+            $.getJSON({
+                url: "/address", data: {"data":selection}, success: function (result) {
+                    Plotly.newPlot("chart", result,{})
+                }
+            })
+        }
+        function radius_cb(selection) {
+            $.getJSON({
+                url: "/radius", data: {"data":selection}, success: function (result) {
+                    Plotly.newPlot("chart", result,{})
+                }
+            })
+        }
+        function size_cb(selection) {
+            $.getJSON({
+                url: "/size", data: {"data":selection}, success: function (result) {
+                    Plotly.newPlot("chart", result,{})
+                }
+            })
+        }
+    </script>
+
+<!-- Primary Meta Tags -->
+<title>
+    GLIn example APP
+</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="title" content="GLIn example APP">
+<meta name="author" content="Team 9">
+<meta name="description" content="JacobsHack 2022 project">
+<link rel="canonical" href="https://appseed.us/apps/flask-apps/flask-pixel-bootstrap-uikit">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120" href="{{ config.ASSETS_ROOT }}/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ config.ASSETS_ROOT }}/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ config.ASSETS_ROOT }}/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="{{ config.ASSETS_ROOT }}/img/favicon/site.webmanifest">
+<link rel="mask-icon" href="{{ config.ASSETS_ROOT }}/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Fontawesome -->
+<link type="text/css" href="{{ config.ASSETS_ROOT }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+<!-- Pixel CSS -->
+<link type="text/css" href="{{ config.ASSETS_ROOT }}/css/pixel.css" rel="stylesheet">
+
+</head>
+<body>
+    
+    {% include 'includes/navigation.html' %}
+
+    <main>
+
+        {% include 'includes/preloader.html' %}
+
+        <!-- Hero -->
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="bootstrap-big-icon d-none d-lg-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="700" height="622" class="d-block my-1"
+                                viewBox="0 0 24 24" role="img">
+                                <title>Bootstrap</title>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M22,3.41l-.12-1.26-1.2.4a13.84,13.84,0,0,1-6.41.64,11.87,11.87,0,0,0-6.68.9A7.23,7.23,0,0,0,3.3,9.5a9,9,0,0,0,.39,4.58,16.6,16.6,0,0,1,1.18-2.2A9.85,9.85,0,0,1,8.94,8.45a11.16,11.16,0,0,1,5.06-1v0A12.08,12.08,0,0,0,9.34,9.2a9.48,9.48,0,0,0-1.86,1.53,11.38,11.38,0,0,0-1.39,1.91,16.39,16.39,0,0,0-1.57,4.54A26.42,26.42,0,0,0,4,22H6a30.69,30.69,0,0,1,.59-4.32,9.25,9.25,0,0,0,4.52,1.11,11,11,0,0,0,4.28-.87C23,14.67,22,3.86,22,3.41Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h1 class="fw-bolder display-2">
+                            GLIn
+                        </h1>
+                        <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
+                            Expand your operations while maintaining a low carbon footprint
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="fill-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                    <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+                </svg></figure>
+        </section>
+
+        <section class="section section-lg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <input type="text" class="form-control input-lg" name="input" placeholder="Address of the central distribution center" autocomplete="off" autofocus onchange="address_cb(this.value)">
+                    </div>
+                    <div class="col-2">
+                        <input type="number" class="form-control input-lg" name="input" placeholder="Search Rad Km" autocomplete="off" value="5" autofocus onchange="radius_cb(this.value)">
+                    </div>
+                    <div class="col-2">
+                        <input type="number" class="form-control input-lg" name="input" placeholder="Min Area Km" autocomplete="off" value="0.5" autofocus onchange="size_cb(this.value)">
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div id='chart' class='chart'”></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    {% include 'includes/scripts.html' %}
+
+</body>
+
+<script type='text/javascript'>
+    graphs = {{graphJSON | safe}};
+    Plotly.plot('chart',graphs,{});
+</script>
+
+</html>
